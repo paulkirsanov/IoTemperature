@@ -1,7 +1,5 @@
 #include "main.h"
 
-ring_buffer_t ring_rx;
-
 void rcc_init(void);
 
 int main(void)
@@ -9,10 +7,9 @@ int main(void)
 	rcc_init();
 	usart2_init();
 	led_init();
+	timer2_init();
 	timer3_init();
-	delay_tim4_init();
-	
-	ring_init(&ring_rx, 256);
+	delay_tim1_init();
 
 	while(1)
 	{
@@ -53,7 +50,16 @@ void USART2_IRQHandler(void)
 	{
 		USART2->SR &= ~USART_SR_RXNE;
 		
-		ring_put(USART2->DR, &ring_rx);
+	}
+}
+
+void TIM2_IRQHandler(void)
+{
+	if(TIM2->SR & TIM_SR_UIF)
+	{
+		TIM2->SR &= ~TIM_SR_UIF;
+		
+		usart_send_string("hello");
 	}
 }
 

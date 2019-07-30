@@ -5,7 +5,7 @@ void timer2_init(void)
 	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
 	
 	TIM2->PSC = 35999;
-	TIM2->ARR = 99;
+	TIM2->ARR = 1999;
 	TIM2->CNT = 0;
 	TIM2->EGR = TIM_EGR_UG;
 	
@@ -20,7 +20,7 @@ void timer3_init(void)
 	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
 	
 	TIM3->PSC = 35999;
-	TIM3->ARR = 1999;
+	TIM3->ARR = 999;
 	TIM3->CNT = 0;
 	TIM3->EGR = TIM_EGR_UG;
 	
