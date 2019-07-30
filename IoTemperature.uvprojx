@@ -52,7 +52,7 @@
           <OutputName>IoTemperature</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -383,11 +383,6 @@
           <GroupName>Code</GroupName>
           <Files>
             <File>
-              <FileName>button.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Code\src\button.c</FilePath>
-            </File>
-            <File>
               <FileName>led.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Code\src\led.c</FilePath>
@@ -411,6 +406,21 @@
               <FileName>delay_tim1.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Code\src\delay_tim1.c</FilePath>
+            </File>
+            <File>
+              <FileName>ds18b20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\src\ds18b20.c</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\src\esp8266.c</FilePath>
+            </File>
+            <File>
+              <FileName>common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\src\common.c</FilePath>
             </File>
           </Files>
         </Group>

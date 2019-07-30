@@ -1,19 +1,66 @@
 #include "main.h"
 
+float temperature;
+unsigned char buffer_ROM[8];
+char text_temperature[100] = {0};
+char text[100] = {0};
+
+uint8_t count_packet = 0;
+uint8_t count_error = 0;
+
+esp8266_status current_status = { ESP8266_STATUS_NOWIFI, {0} };
+esp8266_client tp_client = { "184.106.153.149", "80", ESP8266_TCP};
+esp8266_ap ap_client = { "My_WIFI", "pass0000"};
+
 void rcc_init(void);
 
 int main(void)
 {
 	rcc_init();
+	usart1_init();
 	usart2_init();
 	led_init();
-	timer2_init();
+	
 	timer3_init();
 	delay_tim1_init();
+	
+	if(OneWire_Init() == 0)
+	{
+		if(OneWire_Read_ROM(buffer_ROM))
+		{
+			sprintf(text, "DS18B20 ROM %02x%02x%02x%02x%02x%02x%02x%02x \r\n", buffer_ROM[7], buffer_ROM[6], buffer_ROM[5], buffer_ROM[4], buffer_ROM[3], buffer_ROM[2], buffer_ROM[1], buffer_ROM[0]);
+			usart_send_string(USART2, text);
+		}
+	}
+	
+	if(esp8266Begin())
+		usart_send_string(USART2, "Init success\r\n");
+	
+	while(!esp8266Connect(&ap_client, ESP8266_MODE_STA))
+	{
+		usartSendArrar(USART2, (uint8_t *)"No connection\r\n");
+		delay_ms(5000);
+	}
+	usartSendArrar(USART2, (uint8_t *)"Connect success\r\n");
+	
+	timer2_init();
 
 	while(1)
 	{
+		if(esp8266TcpStatus(&current_status))
+		{
+			if(current_status.stat == ESP8266_STATUS_NOWIFI) {
+				usartSendArrar(USART2, (uint8_t *)"ESP8266 STATUS NOWIFI\r\n");
+			} else {
+				esp8266TcpSend_packet(&tp_client, text_temperature);
+			}
+		}
+		else
+		{
+			usartSendArrar(USART2, (uint8_t *)"Error\r\n");
+		}
 		
+		delay_ms(9999);
 	}
 }
 
@@ -59,7 +106,14 @@ void TIM2_IRQHandler(void)
 	{
 		TIM2->SR &= ~TIM_SR_UIF;
 		
-		usart_send_string("hello");
+		/*if(OneWire_Init() == 0)
+		{
+			temperature = OneWire_Print(buffer_ROM);
+			sprintf(text_temperature, "%0.1f", temperature);
+			usart_send_string(USART2, text_temperature);
+		}*/
+		
+		
 	}
 }
 

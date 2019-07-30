@@ -4,8 +4,13 @@
 .\objects\main.o: .\CMSIS\inc\core_cm3.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: .\CMSIS\inc\system_stm32f10x.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: .\Code\inc\led.h
 .\objects\main.o: .\Code\inc\usart.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: .\Code\inc\delay_tim1.h
 .\objects\main.o: .\Code\inc\timer.h
+.\objects\main.o: .\Code\inc\ds18b20.h
+.\objects\main.o: .\Code\inc\common.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: .\Code\inc\esp8266.h

@@ -1,10 +1,12 @@
 --cpu Cortex-M3
-".\objects\button.o"
 ".\objects\led.o"
 ".\objects\main.o"
 ".\objects\timer.o"
 ".\objects\usart.o"
 ".\objects\delay_tim1.o"
+".\objects\ds18b20.o"
+".\objects\esp8266.o"
+".\objects\common.o"
 ".\objects\core_cm3.o"
 ".\objects\system_stm32f10x.o"
 ".\objects\startup_stm32f10x_md.o"
