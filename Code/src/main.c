@@ -47,7 +47,7 @@ int main(void)
 
 	while(1)
 	{
-		if(esp8266TcpStatus(&current_status))
+		/*if(esp8266TcpStatus(&current_status))
 		{
 			if(current_status.stat == ESP8266_STATUS_NOWIFI) {
 				usartSendArrar(USART2, (uint8_t *)"ESP8266 STATUS NOWIFI\r\n");
@@ -60,7 +60,7 @@ int main(void)
 			usartSendArrar(USART2, (uint8_t *)"Error\r\n");
 		}
 		
-		delay_ms(9999);
+		delay_ms(9999);*/
 	}
 }
 
