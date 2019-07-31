@@ -11,10 +11,15 @@ volatile bool buffering = FALSE;
 
 char receiveState = 0x00;
 
-uint8_t buffer2[] = "Host: api.thingspeak.com\r\n";
-uint8_t buffer3[] = "Accept: */*\r\n";
-uint8_t buffer4[] = "User-Agent: Mozilla/4.0 (compatible; esp8266 Lua; Windows NT 5.1)\r\n";
-uint8_t buffer5[] = "\r\n";
+const uint8_t buffer2[] = "Host: api.thingspeak.com\r\n";
+const uint8_t buffer3[] = "Accept: */*\r\n";
+const uint8_t buffer4[] = "User-Agent: Mozilla/4.0 (compatible; esp8266 Lua; Windows NT 5.1)\r\n";
+const uint8_t buffer5[] = "\r\n";
+
+const char *mqtt_server = "m15.cloudmqtt.com";
+const char *mqtt_port = "11525";
+const char *mqtt_user = "cbttnbgx";
+const char *mqtt_password = "7Dic_UMFWS9h";
 
 extern int count_error;
 char text_error[10] = {0};
@@ -234,9 +239,9 @@ bool esp8266TcpSend(uint8_t *buf, uint16_t size)
 		//usartSendArrar(ESP8266_USART, "\r");
 		for(i = 0; i < size; i++)
 		{
-//			USART_ClearFlag(ESP8266_USART,USART_FLAG_TC);
+			ESP8266_USART->SR &= ~USART_SR_TC;
 			usart_send_data(ESP8266_USART, *p);
-//			while(USART_GetFlagStatus(ESP8266_USART, USART_FLAG_TC) == RESET);
+			while(!(ESP8266_USART->SR & USART_SR_TC));
 			p++;
 		}
 		

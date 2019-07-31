@@ -44,9 +44,12 @@ int main(void)
 	usartSendArrar(USART2, (uint8_t *)"Connect success\r\n");
 	
 	timer2_init();
-
+	
 	while(1)
 	{
+		delay_ms(55999);
+		NVIC_DisableIRQ(TIM2_IRQn);
+		NVIC_DisableIRQ(TIM3_IRQn);
 		if(esp8266TcpStatus(&current_status))
 		{
 			if(current_status.stat == ESP8266_STATUS_NOWIFI) {
@@ -60,7 +63,8 @@ int main(void)
 			usartSendArrar(USART2, (uint8_t *)"Error\r\n");
 		}
 		
-		delay_ms(9999);
+		NVIC_EnableIRQ(TIM2_IRQn);
+		NVIC_EnableIRQ(TIM3_IRQn);
 	}
 }
 
@@ -106,14 +110,11 @@ void TIM2_IRQHandler(void)
 	{
 		TIM2->SR &= ~TIM_SR_UIF;
 		
-		/*if(OneWire_Init() == 0)
+		if(OneWire_Init() == 0)
 		{
 			temperature = OneWire_Print(buffer_ROM);
 			sprintf(text_temperature, "%0.1f", temperature);
-			usart_send_string(USART2, text_temperature);
-		}*/
-		
-		
+		}
 	}
 }
 
