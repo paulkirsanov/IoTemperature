@@ -4,6 +4,7 @@
 #include "common.h"
 #include "usart.h"
 #include "delay_tim1.h"
+#include "stdio.h"
 
 #define SOCKET_ERROR 1
 #define INVALID_SOCKET 1
@@ -122,6 +123,12 @@ typedef struct
 	esp8266_ecn ecn;
 }esp8266_sap;
 
+typedef struct
+{
+	uint8_t *buff;
+	uint8_t len;
+} buf;
+
 bool esp8266Begin(void);
 bool esp8266Reset(void);
 bool esp8266Test(void);
@@ -152,7 +159,6 @@ esp8266_status esp8266StatusPrint(void);
 bool esp8266ListAP(esp8266_lap *dataAP);
 bool esp8266Disconnect(void);
 bool esp8266TcpStartServer(void);
-
 
 static const char RESPONSE_OK[] = "OK\r\n";
 static const char RESPONSE_ERROR[] = "ERROR\r\n";
@@ -199,5 +205,11 @@ static const char STATUS_CONNECTED[] = "STATUS:2";
 static const char STATUS_TCP_CONNECTED[] = "STATUS:3";
 static const char STATUS_TCP_DISCONNECT[] = "STATUS:4";
 static const char STATUS_DISCONNECT[] = "STATUS:5";
+
+static uint8_t *buff[] = { "GET /update?api_key=UHFL1R04OC12Y812&field1=", " HTTP/1.1\r\n", "Host: api.thingspeak.com\r\n", "Accept: */*\r\n", "User-Agent: Mozilla/4.0 (compatible; esp8266 Lua; Windows NT 5.1)\r\n", "\r\n" };
+
+static esp8266_client tp_client = { "184.106.153.149", "80", ESP8266_TCP};
+static esp8266_ap ap_client = { "My_WIFI", "pass0000"};
+//static esp8266_ap ap_client = { "NikolGuest", "777555333"};
 
 #endif

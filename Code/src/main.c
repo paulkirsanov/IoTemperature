@@ -2,15 +2,12 @@
 
 float temperature;
 unsigned char buffer_ROM[8];
-char text_temperature[100] = {0};
+char text_temperature[5] = {0};
 char text[100] = {0};
 
-uint8_t count_packet = 0;
-uint8_t count_error = 0;
+uint8_t min_count = 0;
 
 esp8266_status current_status = { ESP8266_STATUS_NOWIFI, {0} };
-esp8266_client tp_client = { "184.106.153.149", "80", ESP8266_TCP};
-esp8266_ap ap_client = { "My_WIFI", "pass0000"};
 
 void rcc_init(void);
 
@@ -21,7 +18,7 @@ int main(void)
 	usart2_init();
 	led_init();
 	
-	timer3_init();
+	
 	delay_tim1_init();
 	
 	if(OneWire_Init() == 0)
@@ -44,23 +41,13 @@ int main(void)
 	usartSendArrar(USART2, (uint8_t *)"Connect success\r\n");
 	
 	timer2_init();
+	timer4_init();
+	
+	timer3_init();
 
 	while(1)
 	{
-		/*if(esp8266TcpStatus(&current_status))
-		{
-			if(current_status.stat == ESP8266_STATUS_NOWIFI) {
-				usartSendArrar(USART2, (uint8_t *)"ESP8266 STATUS NOWIFI\r\n");
-			} else {
-				esp8266TcpSend_packet(&tp_client, text_temperature);
-			}
-		}
-		else
-		{
-			usartSendArrar(USART2, (uint8_t *)"Error\r\n");
-		}
 		
-		delay_ms(9999);*/
 	}
 }
 
@@ -106,14 +93,13 @@ void TIM2_IRQHandler(void)
 	{
 		TIM2->SR &= ~TIM_SR_UIF;
 		
-		/*if(OneWire_Init() == 0)
+		if(OneWire_Init() == 0)
 		{
 			temperature = OneWire_Print(buffer_ROM);
 			sprintf(text_temperature, "%0.1f", temperature);
-			usart_send_string(USART2, text_temperature);
-		}*/
-		
-		
+//			usart_send_string(USART2, text_temperature);
+			
+		}
 	}
 }
 
@@ -123,7 +109,34 @@ void TIM3_IRQHandler(void)
 	{
 		TIM3->SR &= ~TIM_SR_UIF;
 		
-		if(GPIOC->ODR & GPIO_ODR_ODR13){
+//		min_count++;
+		
+//		if(min_count == 5) {
+//			min_count = 0;
+			NVIC_DisableIRQ(TIM2_IRQn);
+			if(esp8266TcpStatus(&current_status))
+			{
+				if(current_status.stat == ESP8266_STATUS_NOWIFI) {
+					usartSendArrar(USART2, (uint8_t *)"ESP8266 STATUS NOWIFI\r\n");
+				} else {
+					esp8266TcpSend_packet(&tp_client, text_temperature);
+				}
+			} else {
+				usartSendArrar(USART2, (uint8_t *)"Error\r\n");
+			}
+			
+			NVIC_EnableIRQ(TIM2_IRQn);
+	//	}
+	}
+}
+
+void TIM4_IRQHandler(void)
+{
+	if(TIM4->SR & TIM_SR_UIF)
+	{
+		TIM4->SR &= ~TIM_SR_UIF;
+		
+		if(GPIOC->ODR & GPIO_ODR_ODR13) {
 			GPIOC->BSRR |= GPIO_BSRR_BR13;
 		} else {
 			GPIOC->BSRR |= GPIO_BSRR_BS13;

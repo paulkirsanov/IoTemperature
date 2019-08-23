@@ -13,7 +13,7 @@ void delay_us(uint16_t value)
 	TIM1->SR &= ~TIM_SR_UIF;
 }
 
-void delay_ms(uint16_t value)
+void delay_ms(uint32_t value)
 {
 	TIM1->PSC = prescaler_ms;
 	TIM1->ARR = value;

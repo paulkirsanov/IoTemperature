@@ -1,23 +1,23 @@
 #include "esp8266.h"
-#include "stdio.h"
 
 #define ESP8266_RX_BUFFER_LEN 	512
 #define TCP_RX_BUFFER_LEN				128
 char esp8266RxBuffer[ESP8266_RX_BUFFER_LEN];
 char tcpRxBuffer[TCP_RX_BUFFER_LEN];
 volatile unsigned int bufferHead;
-volatile unsigned int tcpBufferHead = 0;
-volatile bool buffering = FALSE;
 
-char receiveState = 0x00;
+esp8266_status cur_status = { ESP8266_STATUS_NOWIFI, {0} };
 
-uint8_t buffer2[] = "Host: api.thingspeak.com\r\n";
-uint8_t buffer3[] = "Accept: */*\r\n";
-uint8_t buffer4[] = "User-Agent: Mozilla/4.0 (compatible; esp8266 Lua; Windows NT 5.1)\r\n";
-uint8_t buffer5[] = "\r\n";
+buf b[6];
 
-extern int count_error;
-char text_error[10] = {0};
+void init_array(void)
+{
+	for(int i = 0; i < 6; i++)
+	{
+		b[i].buff = buff[i];
+		b[i].len = strlen((char *)buff[i]);
+	}
+}
 
 bool esp8266Begin()
 {
@@ -110,6 +110,8 @@ bool esp8266Connect(const esp8266_ap *ap, esp8266_wifi_mode wifi_mode)
 	//  2 - ESP8266_MODE_AP - Access point only
 	//  3 - ESP8266_MODE_STAAP - Station/AP combo
 	bool rc = FALSE;
+	
+	init_array();
 	
 	if(wifi_mode == ESP8266_MODE_STA)
 	{
@@ -226,28 +228,30 @@ bool esp8266TcpSend(uint8_t *buf, uint16_t size)
 	esp8266SendCommand(ESP8266_TCP_SEND, ESP8266_CMD_SETUP, params);
 	
 	rsp = esp8266ReadForResponses(RESPONSE_OK, RESPONSE_ERROR, COMMAND_RESPONSE_TIMEOUT);
-	
+			
 	if(rsp)
 	{
 		esp8266ClearBuffer();
-		//usartSendArrar(ESP8266_USART, buf);
-		//usartSendArrar(ESP8266_USART, "\r");
 		for(i = 0; i < size; i++)
 		{
-//			USART_ClearFlag(ESP8266_USART,USART_FLAG_TC);
+			ESP8266_USART->SR &= ~USART_SR_TC;
 			usart_send_data(ESP8266_USART, *p);
-//			while(USART_GetFlagStatus(ESP8266_USART, USART_FLAG_TC) == RESET);
+			while(!(ESP8266_USART->SR & USART_SR_TC));
 			p++;
 		}
 		
-		usartSendArrar(USART2, (uint8_t *)" START ");
-		
 		if(esp8266ReadForResponse("SEND OK", COMMAND_RESPONSE_TIMEOUT))
 		{
-			usartSendArrar(USART2, (uint8_t *)"SEND OK\t");
+			usartSendArrar(USART2, (uint8_t *)"OK\t");
 			return TRUE;
+		} else {
+			usartSendArrar(USART2, (uint8_t *)"SEND ERROR\t");
 		}
+	} else {
+		usartSendArrar(USART2, (uint8_t *)"SEND FAIL\t");
 	}
+
+	
 	return FALSE;
 }
 
@@ -457,71 +461,69 @@ int tcp_getdata(unsigned char* buf, int count)
 
 void esp8266TcpSend_packet(esp8266_client *address_client, const char *data_packet)
 {
+	uint8_t *total_buffer = 0;
+	uint8_t i = 0;
+	
 	while(!esp8266TcpConnect(address_client))
-	{
 		usartSendArrar(USART2, (uint8_t *)"Waiting for connection...\r\n");
-		/*if(esp8266StatusPrint().stat == ESP8266_STATUS_DISCONNECTED)
-		{
-			usartSendArrar(USART2, (uint8_t *)"STATUS DISCONNECTED\t");
-			sprintf(text_error, "%d", ++count_error);
-			LCDI2C_setCursor(5, 1);
-			LCDI2C_write_String(text_error);
-		}*/
-	}
 	
 	usartSendArrar(USART2, (uint8_t *)"Tcp connection is open\r\n");
 	
-	if(esp8266StatusPrint().stat == ESP8266_STATUS_CONNECTED)
+	if(esp8266TcpStatus(&cur_status))
 	{
-		uint8_t buffer1_part1[] = "GET /update?api_key=UHFL1R04OC12Y812&field1=";
-		uint8_t buffer1_part2[] = " HTTP/1.1\r\n";
-		
-		uint8_t length_part1 = strlen((char *)buffer1_part1);
-		uint8_t length_part2 = strlen((char *)buffer1_part2);
-		uint8_t length_data = strlen((char *)data_packet);
-		uint8_t legth_total = length_part1 + length_data + length_part2;
-		
-		uint8_t length_buffer2 = strlen((char *)buffer2);
-		uint8_t length_buffer3 = strlen((char *)buffer3);
-		uint8_t length_buffer4 = strlen((char *)buffer4);
-		uint8_t length_buffer5 = strlen((char *)buffer5);
-		
-		uint8_t *total_buffer = 0;
-		
-		uint8_t *buffer1 = (uint8_t*)malloc(legth_total);
-		strcpy((char *)buffer1, (char *)buffer1_part1);
-		strncat((char *)buffer1, (char *)data_packet, length_data);
-		strncat((char *)buffer1, (char *)buffer1_part2, length_part2);
-		esp8266TcpSend(buffer1, legth_total);
-		free(buffer1);
-		delay_ms(20);
-		total_buffer = (uint8_t*)malloc(length_buffer2);
-		strcpy((char *)total_buffer, (char *)buffer2);
-		esp8266TcpSend(total_buffer, length_buffer2);
-		free(total_buffer);
-		delay_ms(20);
-		total_buffer = (uint8_t*)malloc(length_buffer3);
-		strcpy((char *)total_buffer, (char *)buffer3);
-		esp8266TcpSend(total_buffer, length_buffer3);
-		free(total_buffer);
-		delay_ms(20);
-		total_buffer = (uint8_t*)malloc(length_buffer4);
-		strcpy((char *)total_buffer, (char *)buffer4);
-		esp8266TcpSend(total_buffer, length_buffer4);
-		free(total_buffer);
-		delay_ms(20);
-		total_buffer = (uint8_t*)malloc(length_buffer5);
-		strcpy((char *)total_buffer, (char *)buffer5);
-		esp8266TcpSend(total_buffer, length_buffer5);
-		free(total_buffer);
-		delay_ms(20);
-		
-		usartSendArrar(USART2, (uint8_t *)"\r\nPacket sent\r\n");
-		
-		if(esp8266TcpClose())
+		if(cur_status.stat == ESP8266_STATUS_CONNECTED)
 		{
-			usartSendArrar(USART2, (uint8_t *)"TCP connection is closed\r\n");
+			uint8_t length_data = strlen((char *)data_packet);
+			uint8_t legth_total = b[0].len + length_data + b[1].len;
+			
+			uint8_t *buffer1 = (uint8_t*)malloc(legth_total);
+			strcpy((char *)buffer1, (char *)b[0].buff);
+			strncat((char *)buffer1, (char *)data_packet, length_data);
+			strncat((char *)buffer1, (char *)b[1].buff, b[1].len);
+			esp8266TcpSend(buffer1, legth_total);
+			free(buffer1);
+			
+			for(i = 2; i < 6; i++)
+			{
+				total_buffer = (uint8_t*)malloc(b[i].len);
+				strcpy((char *)total_buffer, (char *)b[i].buff);
+				if(esp8266TcpSend(total_buffer, b[i].len)) {
+					free(total_buffer);
+				} else {
+					usartSendArrar(USART2, (uint8_t *)"\r\nError 1\r\n");
+					break;
+				}
+			}
+			
+			if(i == 6) {
+				usartSendArrar(USART2, (uint8_t *)"\r\nPacket sent\r\n");
+				
+				if(esp8266TcpClose()){
+					usartSendArrar(USART2, (uint8_t *)"TCP connection is closed\r\n");
+				} else {
+					usartSendArrar(USART2, (uint8_t *)"Error - TCP connection isn't closed\r\n");
+				}
+			} else {
+				usartSendArrar(USART2, (uint8_t *)"\r\nError 2\r\n");
+				free(total_buffer);
+				esp8266ClearBuffer();
+				
+				if(esp8266Begin())
+					usart_send_string(USART2, "Init success\r\n");
+				
+				while(!esp8266Connect(&ap_client, ESP8266_MODE_STA))
+				{
+					usartSendArrar(USART2, (uint8_t *)"No connection\r\n");
+					delay_ms(5000);
+				}
+				usartSendArrar(USART2, (uint8_t *)"Connect success\r\n");
+				
+			}
+		} else {
+			usartSendArrar(USART2, (uint8_t *)"ESP8266 STATUS ISN'T CONNECTED\r\n");
 		}
+	} else {
+		usartSendArrar(USART2, (uint8_t *)"ESP8266 STATUS IS FALSE\r\n");
 	}
 }
 
@@ -677,7 +679,7 @@ bool esp8266RxBufferAvailable()
 
 bool esp8266SearchBuffer(const char * test)
 {
-	int i =0;
+	int i = 0;
 	int bufferLen = strlen((const char *)esp8266RxBuffer);
 	// If our buffer isn't full, just do an strstr
 	if (bufferLen < ESP8266_RX_BUFFER_LEN)
@@ -690,13 +692,12 @@ bool esp8266SearchBuffer(const char * test)
 		{
 			return FALSE;
 		}
-	}
-	else
-	{	//! TODO
+	} else {	//! TODO
 		// If the buffer is full, we need to search from the end of the 
 		// buffer back to the beginning.
 		int testLen = strlen(test);
-		for (i=0; i<ESP8266_RX_BUFFER_LEN; i++)
+		usartSendArrar(USART2, (uint8_t *)"Error in esp8266SearchBuffer\r\n");
+		for (i = 0; i < ESP8266_RX_BUFFER_LEN; i++)
 		{
 			
 		}
