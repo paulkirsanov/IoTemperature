@@ -1,80 +1,111 @@
 Dependencies for Project 'IoTemperature', Target 'IoTemperature': (DO NOT MODIFY !)
-F (.\Code\src\led.c)(0x5CF6312D)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
+CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
+F (.\Code\src\led.c)(0x5CF6312D)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
 I (.\Code\inc\led.h)(0x5CEE500A)
 I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
 I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
-F (.\Code\src\main.c)(0x5D5FDADE)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (.\Code\inc\main.h)(0x5D4028D2)
+F (.\Code\src\main.c)(0x5F8D8C33)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (.\Code\inc\main.h)(0x5F8D86D5)
 I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
 I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E5396AC)
 I (.\Code\inc\led.h)(0x5CEE500A)
 I (.\Code\inc\usart.h)(0x5D402B0D)
 I (.\Code\inc\delay_tim1.h)(0x5D429564)
 I (.\Code\inc\timer.h)(0x5D5D4A7A)
 I (.\Code\inc\ds18b20.h)(0x5D402DE0)
 I (.\Code\inc\common.h)(0x5C18F516)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEBC032)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEBC032)
-I (.\Code\inc\esp8266.h)(0x5D5E9127)
-F (.\Code\src\timer.c)(0x5D5FDC49)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\timer.o --omf_browse .\objects\timer.crf --depend .\objects\timer.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E5396AC)
+I (.\Code\inc\esp8266.h)(0x5F8D909E)
+I (.\Code\inc\rtc.h)(0x5F77233A)
+I (.\Code\inc\exti.h)(0x5F194DC7)
+I (.\Code\inc\lowpower.h)(0x5F8D7AA5)
+F (.\Code\src\timer.c)(0x5F76D2F3)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\timer.o --omf_browse .\objects\timer.crf --depend .\objects\timer.d)
 I (.\Code\inc\timer.h)(0x5D5D4A7A)
 I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
 I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
-F (.\Code\src\usart.c)(0x5D402EE2)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
+F (.\Code\src\usart.c)(0x5D402EE2)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
 I (.\Code\inc\usart.h)(0x5D402B0D)
 I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
 I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEBC032)
-F (.\Code\src\delay_tim1.c)(0x5D4295A1)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\delay_tim1.o --omf_browse .\objects\delay_tim1.crf --depend .\objects\delay_tim1.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
+F (.\Code\src\delay_tim1.c)(0x5D4295A1)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\delay_tim1.o --omf_browse .\objects\delay_tim1.crf --depend .\objects\delay_tim1.d)
 I (.\Code\inc\delay_tim1.h)(0x5D429564)
 I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
 I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
-F (.\Code\src\ds18b20.c)(0x5D4024F8)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\ds18b20.o --omf_browse .\objects\ds18b20.crf --depend .\objects\ds18b20.d)
+F (.\Code\src\ds18b20.c)(0x5D4024F8)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\ds18b20.o --omf_browse .\objects\ds18b20.crf --depend .\objects\ds18b20.d)
 I (.\Code\inc\ds18b20.h)(0x5D402DE0)
 I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
 I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
 I (.\Code\inc\delay_tim1.h)(0x5D429564)
 I (.\Code\inc\common.h)(0x5C18F516)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEBC032)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEBC032)
-F (.\Code\src\esp8266.c)(0x5D5FDABC)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\esp8266.o --omf_browse .\objects\esp8266.crf --depend .\objects\esp8266.d)
-I (.\Code\inc\esp8266.h)(0x5D5E9127)
-I (.\Code\inc\common.h)(0x5C18F516)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEBC032)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
-I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
-I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
-I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E5396AC)
+F (.\Code\src\esp8266.c)(0x5F8D8C59)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\esp8266.o --omf_browse .\objects\esp8266.crf --depend .\objects\esp8266.d)
+I (.\Code\inc\esp8266.h)(0x5F8D909E)
 I (.\Code\inc\usart.h)(0x5D402B0D)
+I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
+I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
+I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
 I (.\Code\inc\delay_tim1.h)(0x5D429564)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEBC032)
-F (.\Code\src\common.c)(0x5D402DB7)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\common.o --omf_browse .\objects\common.crf --depend .\objects\common.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E5396AC)
+I (.\Code\inc\ds18b20.h)(0x5D402DE0)
 I (.\Code\inc\common.h)(0x5C18F516)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEBC032)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E5396AC)
+I (.\Code\inc\main.h)(0x5F8D86D5)
+I (.\Code\inc\led.h)(0x5CEE500A)
+I (.\Code\inc\timer.h)(0x5D5D4A7A)
+I (.\Code\inc\rtc.h)(0x5F77233A)
+I (.\Code\inc\exti.h)(0x5F194DC7)
+I (.\Code\inc\lowpower.h)(0x5F8D7AA5)
+F (.\Code\src\common.c)(0x5D402DB7)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\common.o --omf_browse .\objects\common.crf --depend .\objects\common.d)
+I (.\Code\inc\common.h)(0x5C18F516)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
 I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
 I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEBC032)
-F (.\CMSIS\src\core_cm3.c)(0x4C0C9ECE)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\core_cm3.o --omf_browse .\objects\core_cm3.crf --depend .\objects\core_cm3.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
-F (.\CMSIS\src\system_stm32f10x.c)(0x4D7874F0)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F10X_MD-o .\objects\system_stm32f10x.o --omf_browse .\objects\system_stm32f10x.crf --depend .\objects\system_stm32f10x.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E5396AC)
+F (.\Code\src\rtc.c)(0x5F8559C9)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\rtc.o --omf_browse .\objects\rtc.crf --depend .\objects\rtc.d)
+I (.\Code\inc\rtc.h)(0x5F77233A)
 I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
 I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBC032)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
 I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
-F (.\Startup\startup_stm32f10x_md.s)(0x4D787512)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 528" --pd "STM32F10X_MD SETA 1"--list .\listings\startup_stm32f10x_md.lst --xref -o .\objects\startup_stm32f10x_md.o --depend .\objects\startup_stm32f10x_md.d)
+I (.\Code\inc\usart.h)(0x5D402B0D)
+F (.\Code\src\exti.c)(0x5F3E39CE)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\exti.o --omf_browse .\objects\exti.crf --depend .\objects\exti.d)
+I (.\Code\inc\exti.h)(0x5F194DC7)
+I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
+I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
+I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
+I (.\Code\inc\delay_tim1.h)(0x5D429564)
+F (.\Code\src\lowpower.c)(0x5F8D7AA9)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\lowpower.o --omf_browse .\objects\lowpower.crf --depend .\objects\lowpower.d)
+I (.\Code\inc\lowpower.h)(0x5F8D7AA5)
+I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
+I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
+I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
+F (.\CMSIS\src\core_cm3.c)(0x4C0C9ECE)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\core_cm3.o --omf_browse .\objects\core_cm3.crf --depend .\objects\core_cm3.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
+F (.\CMSIS\src\system_stm32f10x.c)(0x4D7874F0)(--c99 --gnu -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\CMSIS\inc -I .\Code\inc-I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="530" -DSTM32F10X_MD -D_RTE_-o .\objects\system_stm32f10x.o --omf_browse .\objects\system_stm32f10x.crf --depend .\objects\system_stm32f10x.d)
+I (.\CMSIS\inc\stm32f10x.h)(0x5858CDFB)
+I (.\CMSIS\inc\core_cm3.h)(0x4D527398)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
+I (.\CMSIS\inc\system_stm32f10x.h)(0x4D7874EA)
+F (.\Startup\startup_stm32f10x_md.s)(0x4D787512)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_IoTemperature-IC:\Users\Pavel_K\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 530" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_stm32f10x_md.lst --xref -o .\objects\startup_stm32f10x_md.o --depend .\objects\startup_stm32f10x_md.d)

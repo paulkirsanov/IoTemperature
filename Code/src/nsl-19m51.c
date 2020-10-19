@@ -1,0 +1,30 @@
+#include "nsl-19m51.h"
+
+void nsl_19m51_init(void)
+{
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
+	RCC->CFGR	&= ~RCC_CFGR_ADCPRE;
+	
+	GPIOA->CRL &= ~GPIO_CRL_CNF6;
+	GPIOA->CRL &= ~GPIO_CRL_MODE6;
+	
+	ADC1->CR1 = 0;
+	ADC1->SQR1 = 0;
+	
+	ADC1->CR2 |= ADC_CR2_CAL;
+	while(!(ADC1->CR2 & ADC_CR2_CAL)){}
+		
+	ADC1->CR2 = ADC_CR2_EXTSEL;
+	ADC1->CR2 |= ADC_CR2_EXTTRIG;
+	ADC1->CR2 |= ADC_CR2_CONT;
+		
+	ADC1->SQR3 = 6;
+	ADC1->CR2 |= ADC_CR2_ADON;
+	ADC1->CR2 |= ADC_CR2_SWSTART;
+}
+
+void nsl_19m51_get_data(uint16_t *ADC_data)
+{
+	*ADC_data = ADC1->DR;
+}

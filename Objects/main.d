@@ -14,3 +14,7 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: .\Code\inc\esp8266.h
+.\objects\main.o: .\Code\inc\main.h
+.\objects\main.o: .\Code\inc\rtc.h
+.\objects\main.o: .\Code\inc\exti.h
+.\objects\main.o: .\Code\inc\lowpower.h

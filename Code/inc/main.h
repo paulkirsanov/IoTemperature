@@ -10,5 +10,8 @@
 #include "timer.h"
 #include "ds18b20.h"
 #include "esp8266.h"
+#include "rtc.h"
+#include "exti.h"
+#include "lowpower.h"
 
 #endif
