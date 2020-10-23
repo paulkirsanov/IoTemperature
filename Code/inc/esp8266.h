@@ -172,7 +172,7 @@ bool esp8266TcpStartServer(void);
 static const char RESPONSE_OK[] = "OK\r\n";
 static const char RESPONSE_ERROR[] = "ERROR\r\n";
 static const char RESPONSE_FAIL[] = "FAIL";
-static const char RESPONSE_READY[] = "WIFI CONNECTED\r\n";
+static const char RESPONSE_READY[] = "ready";			//WIFI CONNECTED
 static const char RESPONSE_RECEIVED[] = "+IPD,";
 static const char RESPONSE_STATUS[] = "+CIPSTATUS";
 

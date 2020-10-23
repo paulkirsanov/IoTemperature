@@ -24,26 +24,32 @@ int main(void)
 	Time.hour = 12;
 	Time.minutes = 00;
 	Time.seconds = 00;
-	
+	    
 	Alarm.hour = 00;
-	Alarm.minutes = 05;
+	Alarm.minutes = 01;
 	Alarm.seconds = 00;
 	
 	RTC_SetCounter(&Time);
-	RTC_SetAlarm(&Alarm);
+	RTC_SetAlarm(&Alarm); 
 	
 	usart1_init();
 	usart2_init();
-	led_init();
 	gpio_init();
 	delay_tim1_init();
 	initializationTask();
 	exti17_init();
-//	sleep_mode();
+	measurerTask();
+
+	while(!esp8266DeepSleepMode(0))
+		usart_send_string(USART2, "esp8266 error deep sleep\r\n");
+	
+	usart_send_string(USART2, "standby mode\r\n");
+	standby_mode();
+	__WFI();
 	
 	while(1)
 	{
-//		__WFI();
+		
 	}
 }
 
@@ -134,37 +140,18 @@ void initializationTask(void)
 	else
 		usart_send_string(USART2, "ds18b20 failed initialization\r\n");
 	
-	if(esp8266SleepMode(ESP8266_SLEEP_DISABLE))
-			usart_send_string(USART2, "esp8266 sleep mode is disable\r\n");
-	
 	GPIOB->BSRR |= GPIO_BSRR_BR0;
+	GPIOB->BSRR |= GPIO_BSRR_BS0;
 	
 	while(!esp8266Begin())
 		usart_send_string(USART2, "esp8266 failed initialization\r\n");
-	
-	while(!esp8266WakeUpGPIO());
-	usart_send_string(USART2, "esp8266 WakeUpGPIO initialization\r\n");
-	
-	usart_send_string(USART2, "esp8266 successful initialization\r\n");
-	
-	GPIOB->BSRR |= GPIO_BSRR_BS0;
 }
 
 void RTCAlarm_IRQHandler(void)
 {
 	if(RTC->CRL & RTC_CRL_ALRF)
 	{
-		RCC->APB1ENR &= ~RCC_APB1ENR_PWREN;
-		
-		RTC_SetAlarm(&Alarm);
-		GPIOB->BSRR = GPIO_BSRR_BR0;
-		measurerTask();
-		while(!esp8266SleepMode(ESP8266_SLEEP_LIGHT))
-			usart_send_string(USART2, "esp8266 error sleep\r\n");
-		GPIOB->BSRR = GPIO_BSRR_BS0;
-		
 		RTC->CRL = RTC_CRL_ALRF;																			// сбросить флаг
-		RCC->APB1ENR |= RCC_APB1ENR_PWREN;
 		EXTI->PR = EXTI_PR_PR17;
 	}
 }

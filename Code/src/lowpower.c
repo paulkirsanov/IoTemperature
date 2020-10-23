@@ -7,19 +7,21 @@ void sleep_mode(void)
 
 void stop_mode(void)
 {
+	RCC->APB1ENR |= RCC_APB1ENR_PWREN;
 	PWR->CR |= PWR_CR_PVDE;																						//Power Voltage Detector Enable
 	PWR->CR |= PWR_CR_LPDS;																						//Low-Power Deepsleep
 	PWR->CR &= ~PWR_CR_PDDS;																					//Clear Power Down Deepsleep
 	SCB->SCR |= SCB_SCR_SLEEPDEEP;																		//Sleep deep bit
-	PWR->CSR &= ~PWR_CSR_WUF;																					//Wakeup Flag
+	PWR->CR |= PWR_CR_CWUF;																						//Clear Wakeup Flag
 }
 
 void standby_mode(void)
 {
+	RCC->APB1ENR |= RCC_APB1ENR_PWREN;
 	PWR->CR &= ~PWR_CR_LPDS;																					//Low-Power Deepsleep
 	PWR->CR |= PWR_CR_PDDS;																						//Power Down Deepsleep
 	SCB->SCR |= SCB_SCR_SLEEPDEEP;																		//Sleep deep bit
-	PWR->CSR &= ~PWR_CSR_WUF;																					//Wakeup Flag
+	PWR->CR |= PWR_CR_CWUF;																						//Clear Wakeup Flag
 }
 
 void reset_pins(void)

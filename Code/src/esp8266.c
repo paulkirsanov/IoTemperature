@@ -14,7 +14,7 @@ bool esp8266Begin()
 {
 	bool test = FALSE;
 	
-	while(!esp8266Reset());	
+//	while(!esp8266Reset());	
 	
 	test = esp8266Test();
 	if(test)
@@ -926,7 +926,7 @@ bool esp8266SleepMode(esp8266_sleep_mode mode)
 bool esp8266WakeUpGPIO(void)
 {
 	esp8266ClearBuffer();
-	usartSendArrar(ESP8266_USART, "AT+WAKEUPGPIO=1,12,0\r\n");
+	usartSendArrar(ESP8266_USART, "AT+WAKEUPGPIO=1,12,1\r\n");
 	
 	return esp8266ReadForResponse(RESPONSE_OK, COMMAND_RESPONSE_TIMEOUT);
 }
