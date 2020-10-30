@@ -1,6 +1,6 @@
 #include "main.h"
 
-float temperature;
+float temperature = 0;
 unsigned char buffer_ROM[8];
 char text_temperature[5] = {0};
 char text_value[5] = {0};
@@ -18,6 +18,7 @@ buf packet1[6] = { { (uint8_t *)"GET /update?api_key=UHFL1R04OC12Y812&field1=", 
 
 int main(void)
 {
+	reset_pins();
 	rcc_init();
 	rtc_init();
 	
@@ -26,11 +27,11 @@ int main(void)
 	Time.seconds = 00;
 	    
 	Alarm.hour = 00;
-	Alarm.minutes = 01;
+	Alarm.minutes = 05;
 	Alarm.seconds = 00;
 	
 	RTC_SetCounter(&Time);
-	RTC_SetAlarm(&Alarm); 
+	RTC_SetAlarm(&Alarm);
 	
 	usart1_init();
 	usart2_init();
@@ -39,11 +40,10 @@ int main(void)
 	initializationTask();
 	exti17_init();
 	measurerTask();
-
+	
 	while(!esp8266DeepSleepMode(0))
 		usart_send_string(USART2, "esp8266 error deep sleep\r\n");
 	
-	usart_send_string(USART2, "standby mode\r\n");
 	standby_mode();
 	__WFI();
 	
@@ -140,8 +140,10 @@ void initializationTask(void)
 	else
 		usart_send_string(USART2, "ds18b20 failed initialization\r\n");
 	
-	GPIOB->BSRR |= GPIO_BSRR_BR0;
 	GPIOB->BSRR |= GPIO_BSRR_BS0;
+	delay_ms(2000);
+	GPIOB->BSRR |= GPIO_BSRR_BR0;
+	delay_ms(5000);
 	
 	while(!esp8266Begin())
 		usart_send_string(USART2, "esp8266 failed initialization\r\n");
@@ -161,6 +163,5 @@ void gpio_init(void)
 	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
 	GPIOB->CRL &= ~GPIO_CRL_CNF0;
 	GPIOB->CRL |= GPIO_CRL_MODE0_0;
-	
-	GPIOB->BSRR |= GPIO_BSRR_BS0;
+	GPIOB->BSRR |= GPIO_BSRR_BR0;
 }

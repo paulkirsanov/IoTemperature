@@ -25,7 +25,8 @@ unsigned char rtc_init(void)
 		RTC->CRL |= RTC_CRL_CNF;																				//Разрешить Запись в регистры RTC
 		while((RTC->CRL & RTC_CRL_RTOFF) == 0);													//проверить закончены ли изменения регистров RTC
 		RTC->PRLL = 0x7FFF;																							//Настроить делитель на 32768 (32767+1)
-		BKP->RTCCR |= BKP_RTCCR_CCO;																		//Включение вывода Tamper
+//		BKP->RTCCR &= ~BKP_RTCCR_CCO;																		//Выключение вывода Tamper
+//		BKP->CR &= ~BKP_CR_TPE;																					//
 		while((RTC->CRL & RTC_CRL_RTOFF) == 0);													//проверить закончены ли изменения регистров RTC
 		RTC->PRLH = 0;
 		

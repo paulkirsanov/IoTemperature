@@ -220,8 +220,8 @@ static const char STATUS_DISCONNECT[] = "STATUS:5";
 //static uint8_t *buff1[] = { "GET /update?api_key=UHFL1R04OC12Y812&field1=", " HTTP/1.1\r\n", "Host: api.thingspeak.com\r\n", "Accept: */*\r\n", "User-Agent: Mozilla/4.0 (compatible; esp8266 Lua; Windows NT 5.1)\r\n", "\r\n" };
 
 static esp8266_client tp_client = { "184.106.153.149", "80", ESP8266_TCP };
-static esp8266_ap ap_client = { "My_WIFI", "pass0000"};
-//static esp8266_ap ap_client = { "NikolGuest", "777555333"};
+//static esp8266_ap ap_client = { "My_WIFI", "pass0000"};
+static esp8266_ap ap_client = { "NikolGuest", "777555333"};
 
 static esp8266_client ow_client = { "184.106.153.149", "80", ESP8266_TCP };
 //lat=59.89
